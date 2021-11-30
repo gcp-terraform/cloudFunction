@@ -99,7 +99,7 @@ module "cloudfunctions" {
 resource "google_storage_bucket_object" "archive" {
   name   = "index.zip"
   bucket = google_storage_bucket.bucket.name
-  source = "pd-us-cas/src/index.zip"
+  source = "src/index.zip"
 }
 
 #creates cloud function 
