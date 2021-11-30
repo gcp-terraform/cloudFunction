@@ -1,11 +1,12 @@
-/*provider "google" {
+resource "google_pubsub_topic" "example" {
+  name = "example-topic"
+
+  labels = {
+    foo = "bar"
+  }
+
+  message_retention_duration = "86600s"
 }
-resource "google_storage_bucket" "default" {
-  name = var.bucket_name
-  project = var.project_id
-  storage_class = var.storage_class
-  location = var.bucket_location
-}*/
 
 
 # Compress source code
