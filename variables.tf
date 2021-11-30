@@ -1,7 +1,9 @@
 
-
+variable "project" {
+  default = "second-project-325919"
+}
 variable "project_id" {
-  default = ""
+  default = "second-project-325919"
 }
 
 variable "notification_config_topic" {

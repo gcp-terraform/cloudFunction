@@ -8,10 +8,15 @@ resource "google_storage_bucket" "default" {
 }*/
 
 # Compress source code
+
+locals {
+  timestamp = formatdate("YYMMDDhhmmss", timestamp())
+	root_dir = abspath("/src/")
+}
 data "archive_file" "source" {
   type        = "zip"
   source_dir  = local.root_dir
-  output_path = "/src/index.zip"
+  output_path = "index.zip"
 }
 
 # Create bucket that will host the source code

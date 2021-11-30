@@ -1,4 +1,4 @@
-output "region" {
+output "regions" {
   value       = var.region
   description = "GCloud Region"
 }
