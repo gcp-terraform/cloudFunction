@@ -48,7 +48,7 @@ resource "google_project_service" "cloud_build" {
 
 module "cloudfunctions" {
 
-  source  = "app.terraform.io/project1101/cloudfunctions/google"
+  source  = "app.terraform.io/app/cloudfunctions/google"
   version = "~> 2.0"
 
   name    = local.function_name
