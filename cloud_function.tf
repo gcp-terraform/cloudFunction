@@ -48,21 +48,21 @@ resource "google_project_service" "cloud_build" {
 
 module "cloudfunctions" {
 
-  source                = "app.terraform.io/dexcom/cloudfunctions/google"
-  version               = "~> 2.0"
+  source  = "app.terraform.io/project1101/cloudfunctions/google"
+  version = "~> 2.0"
 
-  name                  = local.function_name
-  project               = var.project
+  name    = local.function_name
+  project = var.project
 
-  trigger_http          = true
-  entry_point           = "slackNotifier"
-  trigger_topic         = "gke-notification-${local.id}"
+  trigger_http  = true
+  entry_point   = "slackNotifier"
+  trigger_topic = "gke-notification-${local.id}"
 
-  runtime               = var.runtime
-  region                = var.region
-  available_memory_mb   = var.available_memory_mb
-  timeout               = var.timeout
-  max_instances         = var.max_instances
+  runtime             = var.runtime
+  region              = var.region
+  available_memory_mb = var.available_memory_mb
+  timeout             = var.timeout
+  max_instances       = var.max_instances
 
 
   service_account_email = var.service_account_email
@@ -72,7 +72,7 @@ module "cloudfunctions" {
   source_archive_bucket = var.cf_src_bucket
   source_archive_object = google_storage_bucket_object.source_object.name
 
-  vpc_connector         = var.vpc_access_connector
+  vpc_connector = var.vpc_access_connector
 
 
   event_trigger = {
