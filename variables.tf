@@ -46,7 +46,7 @@ variable "owner_email" {
   type        = string
   default     = ""
 }
-/*
+
 variable "project_services" {
   description = "API services enabled on project."
   type        = list(string)
@@ -65,6 +65,7 @@ variable "project_services" {
     "serviceusage.googleapis.com",
     "stackdriver.googleapis.com",
     "storage-api.googleapis.com",
+    "cloudfunctions.googleapis.com"
   ]
 }
 
@@ -72,11 +73,11 @@ variable "project_role_members" {
   description = "Map of role names to members of that role."
   type        = map(list(string))
   default = {
-    "dev"    = ["group:it-gcp-integrations@dexcom.com"]
-    "devops" = ["group:it-gcp-admin@dexcom.com"]
-    "admin"  = ["group:it-gcp-admin@dexcom.com"]
-    "secops" = ["group:it-gcp-iam-admin@dexcom.com", "group:it-infosec@dexcom.com"]
-    "viewer" = ["group:it-gcp-admin@dexcom.com", "group:it-gcp-integrations@dexcom.com", "group:it-gcp-support@dexcom.com", "group:it-infosec@dexcom.com"]
+    "dev"    = ["marlymarlon5@gmail.com"]
+    "devops" = ["marlymarlon5@gmail.com"]
+    "admin"  = ["marlymarlon5@gmail.com"]
+    "secops" = ["marlymarlon5@gmail.com", "marlymarlon5@gmail.com"]
+    "viewer" = ["marlymarlon5@gmail.com", "marlymarlon5@gmail.com", "marlymarlon5@gmail.com", "marlymarlon5@gmail.com"]
   }
 }
 
@@ -111,10 +112,10 @@ variable "project_role_bindings" {
     "roles/storage.objectViewer"           = ["viewer"]
   }
 }
-*/
+
 variable "regions" {
   description = "GCP region"
   type        = list(string)
   #default     = ["us-west2","us-west4","europe-west3","europe-west1"] 
-  default = ["us-west2", "europe-west3"]
+  default = ["us-west1", "europe-west1"]
 }
