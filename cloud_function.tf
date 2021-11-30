@@ -7,11 +7,17 @@ resource "google_storage_bucket" "default" {
   location = var.bucket_location
 }*/
 
+provider "google" {
+  project = var.project
+  region  = "us-west1"
+  zone    = "us-west1-a"
+}
+
 # Compress source code
 
 locals {
   timestamp = formatdate("YYMMDDhhmmss", timestamp())
-	root_dir = abspath("/src/")
+  root_dir  = abspath("src/")
 }
 data "archive_file" "source" {
   type        = "zip"
@@ -21,8 +27,8 @@ data "archive_file" "source" {
 
 # Create bucket that will host the source code
 resource "google_storage_bucket" "bucket" {
-  name = "${var.project}-function"
-  location      = "US"
+  name     = "${var.project}-function"
+  location = "US"
 }
 
 # Add source code zip to bucket
