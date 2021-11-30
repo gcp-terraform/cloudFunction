@@ -1,5 +1,5 @@
 output "regions" {
-  value       = var.region
+  value       = var.regions
   description = "GCloud Region"
 }
 
