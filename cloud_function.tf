@@ -85,9 +85,7 @@ module "cloudfunctions" {
 }
 */
 #creates bucket
-resource "google_storage_bucket" "bucket" {
-  name     = "gke_notification"
-}
+
 
 #creates object & stores source
 resource "google_storage_bucket_object" "archive" {
@@ -99,9 +97,9 @@ resource "google_storage_bucket_object" "archive" {
 #creates cloud function 
 resource "google_cloudfunctions_function" "function" {
 
-  name        = "gke_cluster_notification"
-  description = "Function created to run with pub/sun"
-  runtime     = "nodejs14"
+  name                  = "gke_cluster_notification"
+  description           = "Function created to run with pub/sun"
+  runtime               = "nodejs14"
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.archive.name
@@ -114,7 +112,7 @@ resource "google_cloudfunctions_function" "function" {
 
 # IAM entry for a single user to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
- cloud_function = google_cloudfunctions_function.function.name
+  cloud_function = google_cloudfunctions_function.function.name
 
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
