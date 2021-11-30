@@ -44,7 +44,7 @@ resource "google_project_service" "cloud_build" {
   disable_dependent_services = true
   disable_on_destroy         = false
 }
-
+/*
 
 module "cloudfunctions" {
 
@@ -83,9 +83,9 @@ module "cloudfunctions" {
 
 
 }
-
+*/
 #creates bucket
-/*resource "google_storage_bucket" "bucket" {
+resource "google_storage_bucket" "bucket" {
   name     = "gke_notification"
 }
 
@@ -119,4 +119,3 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
 }
-*/
