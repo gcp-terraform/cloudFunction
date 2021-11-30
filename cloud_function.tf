@@ -112,7 +112,7 @@ resource "google_cloudfunctions_function" "function" {
   trigger_http          = true
   timeout               = 60
   entry_point           = "slackNotifier"
-  trigger_topic         = "gke-notification-${local.id}"
+  //trigger_topic         = "gke-notification-${local.id}"
 
 }
 
