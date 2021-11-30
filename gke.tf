@@ -23,7 +23,7 @@ resource "google_compute_network" "vpc" {
 resource "google_compute_subnetwork" "subnet" {
   name          = "subnetwork"
   ip_cidr_range = "10.2.0.0/16"
-  region        = "us-central1"
+  region        = "us-west1"
   network       = google_compute_network.vpc.name
   secondary_ip_range {
     range_name    = "tf-test-secondary-range-update1"
@@ -31,19 +31,12 @@ resource "google_compute_subnetwork" "subnet" {
   }
 }
 
-data "google_client_config" "provider" {}
 # GKE cluster
 resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
   location = "US"
 
-provider "kubernetes" {
-  host  = "https://${data.google_container_cluster.primary.endpoint}"
-  token = data.google_client_config.provider.access_token
-  cluster_ca_certificate = base64decode(
-    data.google_container_cluster.my_cluster.master_auth[0].cluster_ca_certificate,
-  )
-}
+
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
