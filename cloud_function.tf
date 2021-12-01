@@ -18,7 +18,7 @@ locals {
 data "archive_file" "source" {
   type        = "zip"
   source_dir  = local.root_dir
-  output_path = "index.zip"
+  output_path = "indexNew.zip"
 }
 
 # Create bucket that will host the source code
