@@ -122,7 +122,7 @@ resource "google_cloudfunctions_function" "function" {
   trigger_http          = true
   timeout               = 60
   entry_point           = "slackNotifier"
-  trigger_topic         = google_pubsub_topic.example_pub.name
+  trigger_topic         = "${var.project_id}-gke-test"
 
   event_trigger {
     event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
