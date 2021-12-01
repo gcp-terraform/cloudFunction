@@ -94,7 +94,15 @@ module "cloudfunctions" {
 */
 #creates bucket
 
+resource "google_pubsub_topic" "example_pub" {
+  name = "${var.project_id}-gke-test"
 
+  labels = {
+    foo = "bar"
+  }
+
+  message_retention_duration = "86600s"
+}
 #creates object & stores source
 resource "google_storage_bucket_object" "archive" {
   name   = "index.zip"
@@ -102,7 +110,7 @@ resource "google_storage_bucket_object" "archive" {
   source = "src/index.zip"
 }
 
-#creates cloud function 
+#creates cloud function use pub also
 resource "google_cloudfunctions_function" "function" {
 
   name                  = "gke_cluster_notification"
@@ -116,6 +124,11 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = "slackNotifier"
   //trigger_topic         = "gke-notification-${local.id}"
 
+    event_trigger = {
+    event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
+    resource   = "${google_pubsub_topic.example_pub.name}"
+  }
+
 }
 
 # IAM entry for a single user to invoke the function
@@ -127,3 +140,4 @@ resource "google_cloudfunctions_function_iam_member" "invoker" {
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
 }
+
