@@ -1,6 +1,6 @@
 locals {
-  name               = "cluster-${var.regions.0}"
-  notification_topic = "${var.project_id}-gke-test"
+  name                      = "cluster-${var.regions.0}"
+  notification_topic        = "${var.project_id}-gke-test"
   notification_config_topic = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
 }
 
@@ -56,7 +56,7 @@ resource "google_container_cluster" "primary" {
   notification_config {
     pubsub {
       enabled = true
-      topic = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
+      topic   = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
     }
   }
 
