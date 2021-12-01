@@ -7,6 +7,3 @@ provider "google" {
 
   //version = "~> 1.20.0"
 }
-
-provider "google" {
-}
