@@ -124,9 +124,9 @@ resource "google_cloudfunctions_function" "function" {
   entry_point           = "slackNotifier"
   //trigger_topic         = "gke-notification-${local.id}"
 
-    event_trigger = {
+  event_trigger {
     event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
-    resource   = "${google_pubsub_topic.example_pub.name}"
+    resource   = google_pubsub_topic.example_pub.name
   }
 
 }
