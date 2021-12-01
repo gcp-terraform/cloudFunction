@@ -52,13 +52,7 @@ resource "google_container_cluster" "primary" {
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
 
-  notification_config {
-  pubsub {
-    enabled = true
-    topic = google_pubsub_topic.notifications.id
-  }
-}
-
+  
 }
 /*
 # Separately Managed Node Pool
