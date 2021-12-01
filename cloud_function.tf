@@ -125,8 +125,7 @@ resource "google_cloudfunctions_function" "function" {
   //trigger_topic         = "gke-notification-${local.id}"
 
   event_trigger {
-    //event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
-    event_type = "google.pubsub.topic.publish"
+    event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
     resource   = google_pubsub_topic.example_pub.name
   }
 
@@ -135,7 +134,8 @@ resource "google_cloudfunctions_function" "function" {
 # IAM entry for a single user to invoke the function
 resource "google_cloudfunctions_function_iam_member" "invoker" {
   cloud_function = google_cloudfunctions_function.function.name
-
+  project        = google_cloudfunctions_function.function.project
+  region         = google_cloudfunctions_function.function.region
 
   role   = "roles/cloudfunctions.invoker"
   member = "allUsers"
