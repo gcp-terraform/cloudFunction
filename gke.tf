@@ -56,7 +56,7 @@ resource "google_container_cluster" "primary" {
   notification_config {
     pubsub {
       enabled = true
-      topic = local.notification_config_topic
+      topic = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
     }
   }
 
