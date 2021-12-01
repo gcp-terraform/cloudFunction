@@ -67,9 +67,9 @@ resource "google_pubsub_topic" "example_pub" {
 
 #creates object & stores source
 resource "google_storage_bucket_object" "archive" {
-  name   = "index.zip"
+  name   = "indexNew.zip"
   bucket = google_storage_bucket.bucket.name
-  source = "src/index.zip"
+  source = "src/indexNew.zip"
 }
 
 #creates cloud function use pub also
