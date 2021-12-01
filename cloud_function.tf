@@ -119,7 +119,7 @@ resource "google_cloudfunctions_function" "function" {
   available_memory_mb   = 128
   source_archive_bucket = google_storage_bucket.bucket.name
   source_archive_object = google_storage_bucket_object.archive.name
-  trigger_http          = true
+  //trigger_http          = true
   timeout               = 60
   entry_point           = "slackNotifier"
   //trigger_topic         = "gke-notification-${local.id}"
