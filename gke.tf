@@ -1,7 +1,7 @@
 locals {
   name               = "cluster-${var.regions.0}"
-  notification_topic = "gke-notification"
-  notification_config_topic = "projects/${var.project_id}/topics/gke-notification-test"
+  notification_topic = "${var.project_id}-gke-test"
+  notification_config_topic = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
 }
 
 variable "gke_username" {

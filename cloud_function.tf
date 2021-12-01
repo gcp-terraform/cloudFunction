@@ -54,7 +54,6 @@ resource "google_project_service" "cloud_build" {
 }
 
 #creates bucket
-
 resource "google_pubsub_topic" "example_pub" {
   name = "${var.project_id}-gke-test"
 
