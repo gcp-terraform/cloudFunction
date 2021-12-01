@@ -26,14 +26,14 @@ resource "google_storage_bucket" "bucket" {
   name     = "${var.project}-function"
   location = "US"
 }
-
+/*
 # Add source code zip to bucket
 resource "google_storage_bucket_object" "zip" {
   # Append file MD5 to force bucket to be recreated>
   name   = "source.zip#${data.archive_file.source.output_md5}"
   bucket = google_storage_bucket.bucket.name
   source = data.archive_file.source.output_path
-}
+}*/
 
 # Enable Cloud Functions API
 resource "google_project_service" "cloud_function" {
