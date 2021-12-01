@@ -125,7 +125,8 @@ resource "google_cloudfunctions_function" "function" {
   //trigger_topic         = "gke-notification-${local.id}"
 
   event_trigger {
-    event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
+    //event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
+    event_type = "google.pubsub.topic.publish"
     resource   = google_pubsub_topic.example_pub.name
   }
 
