@@ -54,6 +54,8 @@ resource "google_container_cluster" "primary" {
 
   
 }
+
+
 /*
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
