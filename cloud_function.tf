@@ -88,7 +88,8 @@ resource "google_cloudfunctions_function" "function" {
 
   event_trigger {
     event_type = "google.pubsub.topic.publish"
-    resource   = "projects/${var.project_id}/topics/${local.name}"
+    resource   = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
+    //--notification-config=pubsub=ENABLED,pubsub-topic=projects/second-project-325919/topics/example-topic
   }
 
   environment_variables = {
