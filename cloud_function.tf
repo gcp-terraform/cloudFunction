@@ -92,6 +92,8 @@ resource "google_cloudfunctions_function" "function" {
     //--notification-config=pubsub=ENABLED,pubsub-topic=projects/second-project-325919/topics/example-topic
   }
 
+  
+
   environment_variables = {
     SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
     //ZONE       = var.zone

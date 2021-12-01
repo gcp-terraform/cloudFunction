@@ -1,6 +1,7 @@
 locals {
   name               = "cluster-${var.regions.0}"
-  notification_topic = "gke-notification-"
+  notification_topic = "gke-notification"
+  notification_config_topic = "projects/${var.project_id}/topics/gke-notification-test"
 }
 
 variable "gke_username" {
@@ -38,9 +39,16 @@ resource "google_compute_subnetwork" "subnet" {
 
 # GKE cluster
 resource "google_container_cluster" "primary" {
+  provider = google-beta
   name     = "${var.project_id}-gke"
   location = "us-west1"
 
+  notification_config {
+    pubsub {
+      enabled = true
+      topic = local.notification_config_topic
+    }
+  }
 
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
@@ -54,6 +62,7 @@ resource "google_container_cluster" "primary" {
 
 
 }
+
 
 
 /*
