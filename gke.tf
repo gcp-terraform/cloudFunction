@@ -39,7 +39,7 @@ resource "google_compute_subnetwork" "subnet" {
 
 # GKE cluster
 resource "google_container_cluster" "primary" {
-  provider = google-beta
+  //provider = google-beta
   name     = "${var.project_id}-gke"
   location = "us-west1"
 
