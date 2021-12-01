@@ -1,3 +1,8 @@
+locals {
+  name               = "cluster-${var.regions.0}"
+  notification_topic = "gke-notification-"
+}
+
 variable "gke_username" {
   default     = ""
   description = "gke username"
@@ -41,7 +46,7 @@ resource "google_container_cluster" "primary" {
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
   //remove_default_node_pool = true
-  initial_node_count       = 3
+  initial_node_count = 2
 
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
