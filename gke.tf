@@ -43,13 +43,6 @@ resource "google_container_cluster" "primary" {
   name     = "${var.project_id}-gke"
   location = "us-west1"
 
-  notification_config {
-    pubsub {
-      enabled = true
-      topic = local.notification_config_topic
-    }
-  }
-
   # We can't create a cluster with no node pool defined, but we want to only use
   # separately managed node pools. So we create the smallest possible default
   # node pool and immediately delete it.
@@ -60,6 +53,12 @@ resource "google_container_cluster" "primary" {
   network    = google_compute_network.vpc.name
   subnetwork = google_compute_subnetwork.subnet.name
 
+  notification_config {
+    pubsub {
+      enabled = true
+      topic = local.notification_config_topic
+    }
+  }
 
 }
 
