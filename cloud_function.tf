@@ -67,7 +67,7 @@ resource "google_pubsub_topic" "example_pub" {
 #creates object & stores source
 resource "google_storage_bucket_object" "archive" {
   name   = "indexNew.zip"
-  bucket = google_storage_bucket.bucket.name
+  bucket = "${google_storage_bucket.bucket.name}"
   source = "src/indexNew.zip"
 }
 
@@ -78,8 +78,8 @@ resource "google_cloudfunctions_function" "function" {
   description           = "Function created to run with pub/sun"
   runtime               = "nodejs14"
   available_memory_mb   = 128
-  source_archive_bucket = google_storage_bucket.bucket.name
-  source_archive_object = google_storage_bucket_object.archive.name
+  source_archive_bucket = "${google_storage_bucket.bucket.name}"
+  source_archive_object = "${google_storage_bucket_object.archive.name}"
   //trigger_http          = true
   timeout     = 60
   entry_point = "slackNotifier"
