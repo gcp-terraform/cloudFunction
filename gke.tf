@@ -25,6 +25,7 @@ resource "google_compute_subnetwork" "subnet" {
 # GKE cluster
 resource "google_container_cluster" "primary" {
   provider           = google-beta
+  project            = var.project_id
   name               = "${var.project_id}-gke"
   location           = var.regions.0
   initial_node_count = 1
@@ -47,7 +48,7 @@ resource "google_container_cluster" "primary" {
   # Enable Autopilot for this cluster
   enable_autopilot = true
 
-    # Configuration of cluster IP allocation for VPC-native clusters
+  # Configuration of cluster IP allocation for VPC-native clusters
   ip_allocation_policy {
     cluster_secondary_range_name  = "pods"
     services_secondary_range_name = "services"
