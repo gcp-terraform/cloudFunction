@@ -65,6 +65,20 @@ resource "google_pubsub_topic" "example_pub" {
 }
 
 #creates object & stores source
+resource "google_storage_bucket_object" "js1" {
+  name   = "indexOld.zip"
+  bucket = "${google_storage_bucket.bucket.name}"
+  source = "src/index.js"
+}
+
+#creates object & stores source
+resource "google_storage_bucket_object" "js2" {
+  name   = "indexOld.zip"
+  bucket = "${google_storage_bucket.bucket.name}"
+  source = "src/package.js"
+}
+
+#creates object & stores source
 resource "google_storage_bucket_object" "archive" {
   name   = "indexOld.zip"
   bucket = "${google_storage_bucket.bucket.name}"

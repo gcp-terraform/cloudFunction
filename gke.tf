@@ -28,15 +28,15 @@ resource "google_container_cluster" "primary" {
   project            = var.project_id
   name               = "${var.project_id}-gke"
   location           = var.regions.0
-  initial_node_count = 1
+  initial_node_count = 2
   network            = google_compute_network.vpc.name
   subnetwork         = google_compute_subnetwork.subnet.name
 
-  private_cluster_config {
-    enable_private_endpoint = false
-    enable_private_nodes    = true
-    master_ipv4_cidr_block  = var.gke_master_ipv4_cidr_block
-  }
+  //private_cluster_config {
+   // enable_private_endpoint = false
+    //enable_private_nodes    = true
+   // master_ipv4_cidr_block  = var.gke_master_ipv4_cidr_block
+  //}
   
 //finds the notification to use
   notification_config {
