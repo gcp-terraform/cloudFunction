@@ -47,7 +47,7 @@ resource "google_container_cluster" "primary" {
   }
 
   # Enable Autopilot for this cluster
-  enable_autopilot = true
+  //enable_autopilot = true
 
   # Configuration of cluster IP allocation for VPC-native clusters
   //ip_allocation_policy {
