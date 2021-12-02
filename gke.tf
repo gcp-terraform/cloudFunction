@@ -4,21 +4,6 @@ locals {
   notification_config_topic = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
 }
 
-variable "gke_username" {
-  default     = ""
-  description = "gke username"
-}
-
-variable "gke_password" {
-  default     = ""
-  description = "gke password"
-}
-
-variable "gke_num_nodes" {
-  default     = 2
-  description = "number of gke nodes"
-}
-
 resource "google_compute_network" "vpc" {
   project                 = var.project_id
   name                    = "vpc-network"
@@ -39,25 +24,33 @@ resource "google_compute_subnetwork" "subnet" {
 
 # GKE cluster
 resource "google_container_cluster" "primary" {
-  provider = google-beta
-  name     = "${var.project_id}-gke"
-  location = "us-west1"
-
-  # We can't create a cluster with no node pool defined, but we want to only use
-  # separately managed node pools. So we create the smallest possible default
-  # node pool and immediately delete it.
-  //remove_default_node_pool = true
+  provider           = google-beta
+  name               = "${var.project_id}-gke"
+  location           = var.regions.0
   initial_node_count = 1
+  network            = google_compute_network.vpc.name
+  subnetwork         = google_compute_subnetwork.subnet.name
 
-
-  network    = google_compute_network.vpc.name
-  subnetwork = google_compute_subnetwork.subnet.name
+  private_cluster_config {
+    enable_private_endpoint = false
+    enable_private_nodes    = true
+    master_ipv4_cidr_block  = var.gke_master_ipv4_cidr_block
+  }
 
   notification_config {
     pubsub {
       enabled = true
       topic   = "projects/${var.project_id}/topics/${var.project_id}-gke-test"
     }
+  }
+
+  # Enable Autopilot for this cluster
+  enable_autopilot = true
+
+    # Configuration of cluster IP allocation for VPC-native clusters
+  ip_allocation_policy {
+    cluster_secondary_range_name  = "pods"
+    services_secondary_range_name = "services"
   }
 
 }

@@ -119,3 +119,8 @@ variable "regions" {
   #default     = ["us-west2","us-west4","europe-west3","europe-west1"] 
   default = ["us-west1", "europe-west1"]
 }
+
+variable "gke_master_ipv4_cidr_block" {
+  type    = string
+  default = "172.23.0.0/28"
+}
