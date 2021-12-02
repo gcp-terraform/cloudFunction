@@ -28,7 +28,7 @@ resource "google_container_cluster" "primary" {
   project            = var.project_id
   name               = "${var.project_id}-gke"
   location           = var.regions.0
-  initial_node_count = 2
+  initial_node_count = 1
   network            = google_compute_network.vpc.name
   subnetwork         = google_compute_subnetwork.subnet.name
 
