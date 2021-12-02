@@ -18,7 +18,7 @@ locals {
 data "archive_file" "source" {
   type        = "zip"
   source_dir  = local.root_dir
-  output_path = "indexNew.zip"
+  output_path = "indexOld.zip"
 }
 
 # Create bucket that will host the source code
@@ -66,9 +66,9 @@ resource "google_pubsub_topic" "example_pub" {
 
 #creates object & stores source
 resource "google_storage_bucket_object" "archive" {
-  name   = "indexNew.zip"
+  name   = "indexOld.zip"
   bucket = "${google_storage_bucket.bucket.name}"
-  source = "src/indexNew.zip"
+  source = "src/indexOld.zip"
 }
 
 #creates cloud function use pub also
@@ -76,7 +76,7 @@ resource "google_cloudfunctions_function" "function" {
 
   name                  = "gke_cluster_notification"
   description           = "Function created to run with pub/sun"
-  runtime               = "nodejs10"
+  runtime               = "nodejs12"
   available_memory_mb   = 128
   source_archive_bucket = "${google_storage_bucket.bucket.name}"
   source_archive_object = "${google_storage_bucket_object.archive.name}"
