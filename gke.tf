@@ -37,7 +37,8 @@ resource "google_container_cluster" "primary" {
     enable_private_nodes    = true
     master_ipv4_cidr_block  = var.gke_master_ipv4_cidr_block
   }
-
+  
+//finds the notification to use
   notification_config {
     pubsub {
       enabled = true
